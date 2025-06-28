@@ -1,6 +1,9 @@
-src/data/
+src/data/new_data/
+src/data/processed/
+src/data/config.py
 src/models/
 src/process.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
