@@ -37,9 +37,7 @@ def group_flood_events_by_centroid(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     return grouped
 
 
-def filter_and_save_disasters(
-    gdf: gpd.GeoDataFrame, output_dir: Path = Path("../data/raw")
-):
+def filter_and_save_disasters(gdf: gpd.GeoDataFrame, output_dir: Path):
     os.makedirs(output_dir, exist_ok=True)
 
     gdf_disasters = gdf[
@@ -56,11 +54,14 @@ def filter_and_save_disasters(
 
 
 def main():
+    SCRIPT_DIR = Path(__file__).resolve().parent
+    output_dir = SCRIPT_DIR / ".." / "data" / "raw"
+
     gdf = fetch_geojson(API_TOKEN, limit=20)
     gdf = update_geometry_to_centroid(gdf)
-    filter_and_save_disasters(gdf)
+    filter_and_save_disasters(gdf, output_dir=output_dir)
 
-    print("Data collection completed and saved to ../data/raw.")
+    print(f"Data collection completed and saved to {output_dir.resolve()}")
 
 
 if __name__ == "__main__":
