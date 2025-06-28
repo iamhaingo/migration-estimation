@@ -63,5 +63,5 @@ def main():
     print("Data collection completed and saved to ../data/raw.")
 
 
-# if __name__ == "__main__":
-# main()
+if __name__ == "__main__":
+    main()
