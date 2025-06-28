@@ -1,4 +1,4 @@
-src/data/new_data/
+src/data/raw/
 src/data/processed/
 src/data/config.py
 src/models/
