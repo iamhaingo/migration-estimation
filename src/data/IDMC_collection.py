@@ -1,5 +1,6 @@
 import requests
 import geopandas as gpd
+import pandas as pd
 import os
 from shapely.geometry import MultiPoint
 from pathlib import Path
@@ -20,6 +21,12 @@ def update_geometry_to_centroid(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     )
     gdf = gdf.set_geometry("geometry", crs="EPSG:4326")
     return gdf
+
+
+def convert_and_drop_event_dates(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    df["Start date"] = pd.to_datetime(df["Event start date"])
+    df["End date"] = pd.to_datetime(df["Event end date"])
+    return df.drop(columns=["Event start date", "Event end date"])
 
 
 def compute_centroid(points):
@@ -48,6 +55,9 @@ def filter_and_save_disasters(gdf: gpd.GeoDataFrame, output_dir: Path):
 
     gdf_disasters = group_flood_events_by_centroid(gdf_disasters)
     gdf_flood = group_flood_events_by_centroid(gdf_flood)
+
+    # gdf_flood = convert_and_drop_event_dates(gdf_flood)
+    # gdf_disasters = convert_and_drop_event_dates(gdf_disasters)
 
     gdf_flood.to_parquet(os.path.join(output_dir, "gd_flood.parquet"))
     gdf_disasters.to_parquet(os.path.join(output_dir, "gd_disasters.parquet"))
