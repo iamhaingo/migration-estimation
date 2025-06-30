@@ -56,8 +56,8 @@ def filter_and_save_disasters(gdf: gpd.GeoDataFrame, output_dir: Path):
     gdf_disasters = group_flood_events_by_centroid(gdf_disasters)
     gdf_flood = group_flood_events_by_centroid(gdf_flood)
 
-    # gdf_flood = convert_and_drop_event_dates(gdf_flood)
-    # gdf_disasters = convert_and_drop_event_dates(gdf_disasters)
+    gdf_flood = convert_and_drop_event_dates(gdf_flood)
+    gdf_disasters = convert_and_drop_event_dates(gdf_disasters)
 
     gdf_flood.to_parquet(os.path.join(output_dir, "gd_flood.parquet"))
     gdf_disasters.to_parquet(os.path.join(output_dir, "gd_disasters.parquet"))
