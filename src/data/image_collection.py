@@ -222,3 +222,87 @@ def get_viirs_nightlight_median_numpy(
     except Exception as e:
         print(f"Error processing VIIRS data for point {point_index}: {str(e)}")
         return None, None
+
+
+def collect_unified_data(
+    point_indices,
+    gdf,
+    buffer_distance=5000,
+    start_or_end="Start date",
+    viirs_scale=30,
+    landsat_scale=30,
+    target_size=(330, 330),
+    target_crs="EPSG:4326",
+):
+    results = {}
+
+    for idx in point_indices:
+        # Get nighttime lights data for start and end dates
+        viirs_data_start = get_viirs_nightlight_median_numpy(
+            idx,
+            gdf,
+            buffer_distance,
+            "Start date",
+            viirs_scale,
+            target_size,
+            target_crs,
+        )
+
+        viirs_data_end = get_viirs_nightlight_median_numpy(
+            idx,
+            gdf,
+            buffer_distance,
+            "End date",
+            viirs_scale,
+            target_size,
+            target_crs,
+        )
+
+        # Get RGB data
+        rgb_data = get_landsat9_rgb_median_numpy(
+            idx,
+            gdf,
+            buffer_distance,
+            start_or_end,
+            landsat_scale,
+            target_size,
+            target_crs,
+        )
+
+        results[idx] = {
+            "viirs_start": viirs_data_start[0],
+            "viirs_end": viirs_data_end[0],
+            "rgb": rgb_data[0],
+            "figures": gdf.iloc[idx]["Total figures"],
+        }
+
+    return results
+
+
+def main():
+    # collect first 1 points
+    num = 1
+    point_indices = range(num)
+    collected_data = collect_unified_data(
+        point_indices,
+        gdf_flood,
+        buffer_distance=5000,
+        start_or_end="Start date",
+        viirs_scale=30,
+        landsat_scale=30,
+        target_size=(330, 330),
+        target_crs="EPSG:4326",
+    )
+
+    # view in dataframe
+    df_collected = pd.DataFrame.from_dict(
+        collected_data,
+        orient="index",
+        columns=["viirs_start", "viirs_end", "rgb", "figures"],
+    )
+    # Display the first few rows of the DataFrame
+    df_collected
+
+
+if __name__ == "__main__":
+    main()

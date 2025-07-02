@@ -2,7 +2,7 @@ src/data/raw/
 src/data/processed/
 src/data/config.py
 src/models/
-src/process.ipynb
+src/*.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
