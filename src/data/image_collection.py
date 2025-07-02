@@ -13,14 +13,6 @@ from config import PROJECT_ID
 ee.Authenticate()
 ee.Initialize(project=PROJECT_ID)
 
-folder_path: Path = Path("../data/raw/")
-path_parquet_flood = folder_path / "gd_flood.parquet"
-path_parquet_disasters = folder_path / "gd_disasters.parquet"
-
-# Read IDMC files
-gdf_flood = gpd.read_parquet(path_parquet_flood)
-gdf_disasters = gpd.read_parquet(path_parquet_disasters)
-
 # parameters
 buffer_distance = 10000
 target_size = (330, 330)
@@ -280,6 +272,16 @@ def collect_unified_data(
 
 
 def main():
+    folder_path: Path = Path("../data/raw/")
+    path_parquet_flood = folder_path / "gd_flood.parquet"
+    # path_parquet_disasters = folder_path / "gd_disasters.parquet"
+
+    # Read IDMC files
+    gdf_flood = gpd.read_parquet(path_parquet_flood)
+    print(gdf_flood.columns)
+    print(len(gdf_flood))
+    # gdf_disasters = gpd.read_parquet(path_parquet_disasters)
+
     # collect first 1 points
     num = 1
     point_indices = range(num)
