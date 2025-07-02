@@ -3,7 +3,7 @@ src/data/processed/
 src/data/config.py
 src/data/test.py
 
-src/models/
+src/models/checkpoints/
 src/*.ipynb
 
 # Byte-compiled / optimized / DLL files
