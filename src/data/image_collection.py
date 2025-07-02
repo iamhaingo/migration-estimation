@@ -9,6 +9,7 @@ from pathlib import Path
 from shapely.geometry import MultiPoint
 from skimage.transform import resize
 from config import PROJECT_ID
+from config import raw_location
 
 ee.Authenticate()
 ee.Initialize(project=PROJECT_ID)
@@ -272,9 +273,7 @@ def collect_unified_data(
 
 
 def main():
-    folder_path: Path = Path("../data/raw/")
-    path_parquet_flood = folder_path / "gd_flood.parquet"
-    # path_parquet_disasters = folder_path / "gd_disasters.parquet"
+    path_parquet_flood: Path = Path(raw_location + "gd_flood.parquet")
 
     # Read IDMC files
     gdf_flood = gpd.read_parquet(path_parquet_flood)
@@ -303,7 +302,7 @@ def main():
         columns=["viirs_start", "viirs_end", "rgb", "figures"],
     )
     # Display the first few rows of the DataFrame
-    df_collected
+    print(df_collected.head())
 
 
 if __name__ == "__main__":

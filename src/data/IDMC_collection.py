@@ -24,9 +24,12 @@ def update_geometry_to_centroid(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
 
 
 def convert_and_drop_event_dates(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
-    df["Start date"] = pd.to_datetime(df["Event start date"])
-    df["End date"] = pd.to_datetime(df["Event end date"])
-    return df.drop(columns=["Event start date", "Event end date"])
+    df["Event start date"] = pd.to_datetime(df["Event start date"])
+    df["Event end date"] = pd.to_datetime(df["Event end date"])
+    df = df.rename(
+        columns={"Event start date": "Start date", "Event end date": "End date"}
+    )
+    return df
 
 
 def compute_centroid(points):
