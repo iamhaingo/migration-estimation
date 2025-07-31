@@ -5,6 +5,7 @@ src/data/test.py
 
 src/models/checkpoints/
 src/*.ipynb
+src/*.pdf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
