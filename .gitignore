@@ -4,7 +4,7 @@ src/data/config.py
 src/data/test.py
 
 src/models/checkpoints/
-src/*.ipynb
+# src/*.ipynb
 src/*.pdf
 
 # Byte-compiled / optimized / DLL files
