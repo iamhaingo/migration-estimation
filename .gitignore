@@ -3,6 +3,9 @@ src/data/processed/
 src/data/config.py
 src/data/test.py
 
+src/data/image_collection.py
+src/data/IDMC_collection.py
+
 src/models/checkpoints/
 # src/*.ipynb
 src/*.pdf
