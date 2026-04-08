@@ -15,3 +15,5 @@ Two task formulations are supported:
 - **Ordinal classification** — categorise events into Minimal / Moderate / Severe tiers
 
 The regression head outputs a scalar IDP count. The ordinal classification head uses a [CORAL](https://doi.org/10.1016/j.patrec.2020.11.008) layer to preserve severity ordering.
+
+Preprocessed data for inputs can also be downloaded at [Zenodo](10.5281/zenodo.19469206)
