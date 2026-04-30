@@ -1,7 +1,10 @@
 src/data/raw/
+src/data/parquet/
 src/data/processed/
 src/data/config.py
 src/data/test.py
+
+src/models/checkpoints_old/
 
 src/data/image_collection.py
 src/data/IDMC_collection.py
