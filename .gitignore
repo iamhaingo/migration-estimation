@@ -3,6 +3,10 @@ src/data/parquet/
 src/data/processed/
 src/data/config.py
 src/data/test.py
+# ignore generated html and pdf files from the notebooks
+src/*.html
+src/*.pdf
+src/*.png
 
 src/models/checkpoints_old/
 
